@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7c9d8">
+<title>Officially Yours ♡</title>
+<style>
+:root{--pink:#f6c6d5;--pink2:#ffe8ef;--rose:#a83f62;--rose2:#d96b8c;--ink:#653747;--muted:#9b6e7d;--white:#fffafd;--shadow:0 18px 55px #9e4f6c20}
+*{box-sizing:border-box}
+html{min-height:100%;background:#f9dce5}
+body{margin:0;min-height:100vh;font-family:ui-rounded,"Trebuchet MS",system-ui,-apple-system,sans-serif;color:var(--ink);background:radial-gradient(circle at 15% 15%,#fff4f7 0,transparent 28%),radial-gradient(circle at 90% 80%,#edafc4 0,transparent 30%),linear-gradient(140deg,#f9dce5,#f4bfd0 55%,#f8dbe5);display:flex;align-items:center;justify-content:center;padding:22px 14px;overflow-x:hidden}
+button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.wrap{width:min(100%,460px);position:relative;z-index:1}
+.card{background:rgba(255,250,253,.88);border:1px solid #fff9fc;border-radius:30px;box-shadow:var(--shadow);padding:27px 23px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);animation:arrive .6s ease both}
+.lock-card{max-width:360px;margin:auto;text-align:center;padding:28px 24px 25px}
+.brand-icons{font-size:31px;letter-spacing:8px;margin:0 0 10px}
+h1{font-size:clamp(25px,6vw,32px);line-height:1.2;margin:4px 0 9px;color:#9f3c60}
+h2{font-size:23px;line-height:1.25;margin:0 0 8px;color:#9f3c60}
+p{line-height:1.65}
+.sub{font-size:13px;color:var(--muted);margin:0 0 17px}
+.clue{font-size:13px;font-weight:700;color:#b45a79;background:#ffeaf1;border:1px dashed #e9a6bc;border-radius:14px;padding:10px 12px;margin:17px 0 14px}
+.pin-display{height:47px;border:1px solid #edc4d2;background:#fff7fa;border-radius:18px;display:flex;align-items:center;justify-content:center;gap:12px;margin:0 0 18px;color:#bd5a7c;font-size:25px;letter-spacing:5px;box-shadow:inset 0 2px 5px #b05c7710}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:250px;margin:auto}
+.key{border:1px solid #fff;background:linear-gradient(145deg,#fff,#ffedf3);color:#9c4964;border-radius:50%;width:56px;height:56px;margin:auto;box-shadow:0 5px 12px #a6537018;font-size:19px;font-weight:700;transition:transform .15s,box-shadow .15s}
+.key:active,.menu-item:active,.primary:active{transform:scale(.96)}
+.key.delete{font-size:16px;background:#ffe2eb}
+.hint{font-size:12px;color:#bb8294;margin:15px 0 0;min-height:18px}
+.primary{border:0;background:linear-gradient(135deg,#b8486e,#db7795);color:white;border-radius:18px;padding:13px 18px;font-weight:750;box-shadow:0 9px 20px #bd5a7b30;transition:transform .15s}
+.secondary{border:1px solid #edc3d1;background:#fff7fa;color:#a34c69;border-radius:15px;padding:11px 14px;font-weight:700}
+.hidden{display:none!important}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:17px}
+.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:10px;color:#bc7590;font-weight:800}
+.date-pill{font-size:11px;background:#ffedf3;border-radius:999px;padding:8px 10px;color:#a54d6b;white-space:nowrap}
+.home-title{text-align:center;margin:8px 0 20px}
+.home-title .mini{font-size:13px;color:var(--muted);margin:8px 0 0}
+.heart-divider{text-align:center;color:#d77b98;letter-spacing:6px;margin:13px 0 19px}
+.menu{display:grid;gap:12px}
+.menu-item{display:flex;align-items:center;gap:14px;text-align:left;width:100%;padding:15px 14px;border:1px solid #fff;background:linear-gradient(110deg,#fff9fc,#fff0f5);border-radius:19px;box-shadow:0 7px 16px #a653700c;color:var(--ink);transition:transform .15s}
+.menu-icon{width:43px;height:43px;border-radius:15px;background:#ffe0e9;display:grid;place-items:center;font-size:22px;flex-shrink:0}
+.menu-item strong{display:block;font-size:15px;color:#a34564}
+.menu-item small{display:block;font-size:11px;color:#a9808d;margin-top:3px}
+.arrow{margin-left:auto;color:#d0839d;font-size:21px}
+.footer{text-align:center;color:#b17b8c;font-size:11px;margin:21px 0 0}
+.section-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.back{border:0;background:#ffeaf1;color:#a34c69;border-radius:13px;width:39px;height:39px;font-size:21px;flex-shrink:0}
+.letter{font-size:14px;line-height:1.85;color:#6e4855;white-space:pre-line}
+.letter p{margin:0 0 15px}
+.signature{font-family:Georgia,serif;font-style:italic;color:#b34c70;font-size:20px;margin-top:18px}
+.music-box{text-align:center;background:#fff0f5;border-radius:24px;padding:24px 17px;margin:14px 0}
+.album{width:130px;height:130px;border-radius:24px;margin:0 auto 15px;background:linear-gradient(145deg,#f8c8d7,#fff1f6);display:grid;place-items:center;font-size:53px;box-shadow:0 9px 24px #ac52721b}
+.field{width:100%;border:1px solid #ebc4d1;background:#fffafd;padding:12px 13px;border-radius:13px;color:var(--ink);outline:none;margin:7px 0 10px}
+.field:focus{border-color:#cf7894;box-shadow:0 0 0 3px #f8d8e3}
+.note{font-size:12px;color:#a27a88}
+.gallery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.photo{border:1px solid #f4d4df;background:#fff0f5;border-radius:17px;overflow:hidden;min-height:135px;display:flex;align-items:center;justify-content:center;position:relative}
+.photo img{width:100%;height:170px;object-fit:cover;display:block}
+.photo .placeholder{padding:15px;text-align:center;color:#b2758b;font-size:12px}
+.photo .placeholder b{display:block;font-size:29px;margin-bottom:7px}
+.photo-caption{font-size:11px;text-align:center;color:#9e6e80;margin:6px 0 0}
+.gallery-controls{display:flex;flex-wrap:wrap;gap:8px}
+.upload-label{display:inline-flex;align-items:center;justify-content:center;border:1px solid #edc3d1;background:#fff7fa;color:#a34c69;border-radius:15px;padding:11px 13px;font-weight:700;font-size:13px}
+#photoInput{display:none}
+.ending{background:#fff0f5;border-radius:22px;text-align:center;padding:20px 16px;margin-top:17px;color:#a34766;font-family:Georgia,serif;font-size:20px;line-height:1.5}
+.sparkle{position:fixed;pointer-events:none;opacity:.48;z-index:0;animation:floatUp 9s linear infinite;font-size:18px}
+.toast{font-size:12px;min-height:17px;color:#bd577a;margin-top:10px}
+@keyframes arrive{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes floatUp{0%{transform:translateY(25vh) rotate(0deg);opacity:0}15%{opacity:.45}85%{opacity:.35}100%{transform:translateY(-110vh) rotate(35deg);opacity:0}}
+@media(min-width:500px){body{padding:30px}.card{padding:30px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="sparkle" style="left:8%;animation-delay:-2s">♡</div><div class="sparkle" style="left:86%;animation-delay:-6s">✦</div><div class="sparkle" style="left:72%;animation-delay:-4s">♡</div><div class="sparkle" style="left:23%;animation-delay:-7s">✧</div>
+<main class="wrap">
+  <section id="lockScreen" class="card lock-card">
+    <div class="brand-icons">💌 🔒</div>
+    <h1 style="font-size:25px">Unlock Your Special Gift</h1>
+    <p class="sub">A little surprise, made just for you.</p>
+    <div class="clue">♡ PIN clue: “Officially yours...”</div>
+    <div id="pinDisplay" class="pin-display" aria-label="PIN entry">○ ○ ○ ○</div>
+    <div class="keypad" aria-label="PIN keypad">
+      <button class="key" data-digit="1">1</button><button class="key" data-digit="2">2</button><button class="key" data-digit="3">3</button>
+      <button class="key" data-digit="4">4</button><button class="key" data-digit="5">5</button><button class="key" data-digit="6">6</button>
+      <button class="key" data-digit="7">7</button><button class="key" data-digit="8">8</button><button class="key" data-digit="9">9</button>
+      <button class="key delete" id="deletePin" aria-label="Delete last digit">⌫</button><button class="key" data-digit="0">0</button><button class="key delete" id="clearPin" aria-label="Clear PIN">↺</button>
+    </div>
+    <div id="pinHint" class="hint" aria-live="polite">Enter your 4-digit code ♡</div>
+    <p class="footer">made with love, just for you ♡</p>
+  </section>
+
+  <section id="homeScreen" class="card hidden">
+    <div class="topline"><span class="eyebrow">a little world for us</span><span class="date-pill">10 · 10 · 2026</span></div>
+    <div class="home-title">
+      <div style="font-size:28px">💗 ✨ 💗</div>
+      <h1>Happy 40th Monthsary,<br>My Love!</h1>
+      <p class="mini">A little piece of my heart, made just for you.</p>
+    </div>
+    <div class="heart-divider">♡ ── ♡ ── ♡</div>
+    <div class="menu">
+      <button class="menu-item" data-page="message"><span class="menu-icon">💌</span><span><strong>A Message for You</strong><small>something my heart wants you to know</small></span><span class="arrow">›</span></button>
+      <button class="menu-item" data-page="music"><span class="menu-icon">🎵</span><span><strong>Our Favorite Music</strong><small>a song that reminds me of us</small></span><span class="arrow">›</span></button>
+      <button class="menu-item" data-page="gallery"><span class="menu-icon">📸</span><span><strong>Our Little World</strong><small>little moments, big feelings</small></span><span class="arrow">›</span></button>
+    </div>
+    <div class="ending" style="font-size:17px">“If I had to choose all over again,<br>I'd still choose you.” ♡</div>
+    <p class="footer">Forever grateful that it's you. ❤️</p>
+  </section>
+
+  <section id="messageScreen" class="card hidden">
+    <div class="section-head"><button class="back" data-home aria-label="Back">‹</button><div><div class="eyebrow">from my heart to yours</div><h2>A Message for You 💌</h2></div></div>
+    <div id="letterContent" class="letter">
+      <p>Happy monthsary, my love. ♡</p>
+      <p>June 10, 2023 — the day we became us. And now, here we are, celebrating 3 years and 4 months together. Sometimes I think about how many little moments, lessons, laughs, and challenges have brought us here. I may not always find the perfect words, but I hope you always feel how much you mean to me.</p>
+      <p>One of the things I love most about you is the goodness in your heart. I still think about August 28, 2026, when you initiated giving something to someone outside the 7-Eleven in front of PJG. It might have looked like a simple gesture to someone else, but to me, it meant so much. Seeing you genuinely want to help another person made my heart feel full. It reminded me that kindness is not just something you say you believe in — it is something you choose to do.</p>
+      <p>You know how much it means to me when I can help someone, even in a small way. There are things I wish I could have given my lolo and lola when I was younger, when I wasn't yet capable of giving them everything they wanted. Maybe that's one reason why helping people touches me so deeply. So when I saw that same softness and willingness to give in you, I felt something beyond kilig. I felt grateful. I thought, <em>tamang tao yung napili ko.</em></p>
+      <p>I love you for the way you make me feel, but I also love the person you are when no one is asking you to prove anything. I love that your heart can make room for someone else's struggle. I hope that as we grow together, we keep that part of ourselves alive — that we become more patient, more understanding, and more capable of giving, even when life isn't always easy.</p>
+      <p>Of course, we're not perfect. We'll have misunderstandings, hard days, and moments when we need to learn how to understand each other better. But I hope we keep choosing to listen, to grow, and to meet each other with love. I don't expect us to have everything figured out. I just want us to keep trying, cheering for each other's dreams, and building a relationship that feels safe, honest, and kind.</p>
+      <p>Thank you for being part of my life, for the little things you do, and for the memories we're still making. Thank you for reminding me that love isn't only about grand gestures or what we can give each other. Sometimes, it's also about the kind of people we become because we love each other.</p>
+      <p>Happy 40th monthsary, baby. From June 10, 2023, to this day, I'm thankful for our story. I hope we get to celebrate many more dates, reach the dreams we talk about, and have enough to share kindness with the people who need it. Whatever the future brings, I hope we never forget to be gentle with each other and with the world around us.</p>
+      <p>If I had to choose all over again, I'd still choose you — not because everything is always easy, but because there is so much about your heart that I admire and so much about us that I want to keep growing.</p>
+      <p><strong>Officially yours, and still choosing you. Always. ♡</strong></p>
+    </div>
+    <div class="signature">With all my love, your girl ♡</div>
+    <div style="margin-top:20px"><button class="primary" data-home>Back to our little world ♡</button></div>
+  </section>
+
+  <section id="musicScreen" class="card hidden">
+    <div class="section-head"><button class="back" data-home aria-label="Back">‹</button><div><div class="eyebrow">press play, think of us</div><h2>Our Favorite Music 🎵</h2></div></div>
+    <div class="music-box">
+      <div class="album">🎧💗</div>
+      <h2 id="songTitle" style="font-size:19px">Our Song</h2>
+      <p id="songArtist" class="sub">A song that feels like us</p>
+      <div style="width:100%;max-width:320px;margin:14px auto 10px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#f7dce5"><iframe id="songPlayer" title="Our song on YouTube" width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/iiyrcma7OTs?playsinline=1" style="border:0" allow="encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><a id="songLink" class="primary" href="https://music.youtube.com/watch?v=iiyrcma7OTs&amp;si=V_Xkq1igfMY19uWc" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">Open our song ↗</a>
+    </div>
+    <label for="songTitleInput" class="note">Song title</label><input class="field" id="songTitleInput" value="Our Song" placeholder="Enter your song title">
+    <label for="songArtistInput" class="note">Artist / little dedication</label><input class="field" id="songArtistInput" value="A song that reminds me of us ♡" placeholder="Artist or a short dedication">
+    <label for="songUrlInput" class="note">YouTube or Spotify link</label><input class="field" id="songUrlInput" type="url" value="https://music.youtube.com/watch?v=iiyrcma7OTs&amp;si=V_Xkq1igfMY19uWc" placeholder="https://...">
+    <button id="saveSong" class="primary" style="width:100%">Save song details ♡</button>
+    <p id="songStatus" class="note" aria-live="polite">Your song is set as the default. To change it for everyone, update the defaults in the website code.</p>
+    <div style="margin-top:18px"><button class="secondary" data-home>Back to our little world</button></div>
+  </section>
+
+  <section id="galleryScreen" class="card hidden">
+    <div class="section-head"><button class="back" data-home aria-label="Back">‹</button><div><div class="eyebrow">our little memories</div><h2>Our Little World 📸</h2></div></div>
+    <p class="sub">Your photos will be permanent once their image files are uploaded with this website. Photos added from this phone are only temporary in this browser session.</p>
+    <div class="gallery-grid" id="galleryGrid">
+      <div><div class="photo"><div class="placeholder"><b>♡</b>Our first favorite memory</div></div><p class="photo-caption">one of my favorite moments</p></div>
+      <div><div class="photo"><div class="placeholder"><b>✧</b>Our little adventures</div></div><p class="photo-caption">more memories with you</p></div>
+      <div><div class="photo"><div class="placeholder"><b>🌷</b>Just us being us</div></div><p class="photo-caption">the simple things matter</p></div>
+      <div><div class="photo"><div class="placeholder"><b>💗</b>My favorite person</div></div><p class="photo-caption">you, always</p></div>
+    </div>
+    <div class="gallery-controls"><label class="upload-label" for="photoInput">＋ Add photos</label><input id="photoInput" type="file" accept="image/*" multiple><button class="secondary" id="clearPhotos">Clear added photos</button></div>
+    <div id="galleryStatus" class="note" style="margin-top:12px" aria-live="polite"></div>
+    <div style="margin-top:18px"><button class="secondary" data-home>Back to our little world</button></div>
+  </section>
+</main>
+<script>
+(() => {
+  // PERSONALIZE THESE DEFAULTS if you want a different song.
+  const CORRECT_PIN = "0610";
+  let pin = "";
+  const $ = id => document.getElementById(id);
+  const screens = ["lockScreen","homeScreen","messageScreen","musicScreen","galleryScreen"];
+  function showScreen(id) {
+    screens.forEach(s => $(s).classList.toggle("hidden", s !== id));
+    window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+  }
+  function updatePin() { $("pinDisplay").textContent = pin ? "● ".repeat(pin.length).trim() + " ○ ".repeat(4-pin.length).trim() : "○ ○ ○ ○"; }
+  function enterDigit(d) {
+    if (pin.length >= 4) return;
+    pin += d; updatePin();
+    if (pin.length === 4) {
+      if (pin === CORRECT_PIN) {
+        $("pinHint").textContent = "Unlocked with love! 💗";
+        setTimeout(() => { showScreen("homeScreen"); pin=""; updatePin(); $("pinHint").textContent="Enter your 4-digit code ♡"; }, 450);
+      } else {
+        $("pinHint").textContent = "Not quite, my love. Try again ♡";
+        $("pinDisplay").animate([{transform:"translateX(0)"},{transform:"translateX(-5px)"},{transform:"translateX(5px)"},{transform:"translateX(0)"}],{duration:220});
+        setTimeout(() => { pin=""; updatePin(); }, 650);
+      }
+    }
+  }
+  document.querySelectorAll("[data-digit]").forEach(b => b.addEventListener("click", () => enterDigit(b.dataset.digit)));
+  $("deletePin").addEventListener("click", () => {pin=pin.slice(0,-1);updatePin();$("pinHint").textContent="Enter your 4-digit code ♡";});
+  $("clearPin").addEventListener("click", () => {pin="";updatePin();$("pinHint").textContent="Enter your 4-digit code ♡";});
+  document.querySelectorAll("[data-page]").forEach(b => b.addEventListener("click", () => showScreen(({message:"messageScreen",music:"musicScreen",gallery:"galleryScreen"})[b.dataset.page])));
+  document.querySelectorAll("[data-home]").forEach(b => b.addEventListener("click", () => showScreen("homeScreen")));
+
+  $("saveSong").addEventListener("click", () => {
+    const title = $("songTitleInput").value.trim() || "Our Song";
+    const artist = $("songArtistInput").value.trim() || "A song that feels like us";
+    const rawUrl = $("songUrlInput").value.trim();
+    $("songTitle").textContent = title; $("songArtist").textContent = artist;
+    let safeUrl = "https://music.youtube.com/watch?v=iiyrcma7OTs&si=V_Xkq1igfMY19uWc";
+    let embedUrl = "https://www.youtube-nocookie.com/embed/iiyrcma7OTs?playsinline=1";
+    try {
+      const u = new URL(rawUrl);
+      if (["https:","http:"].includes(u.protocol) && ["youtube.com","www.youtube.com","music.youtube.com","youtu.be","open.spotify.com","spotify.com","www.spotify.com"].some(d => u.hostname === d || u.hostname.endsWith("."+d))) {
+        safeUrl = u.href;
+        let videoId = "";
+        if (u.hostname.endsWith("youtu.be")) videoId = u.pathname.split("/").filter(Boolean)[0] || "";
+        else if (u.hostname.includes("youtube.com")) videoId = u.searchParams.get("v") || (u.pathname.startsWith("/embed/") ? u.pathname.split("/")[2] : "");
+        if (videoId && /^[A-Za-z0-9_-]{6,}$/.test(videoId)) embedUrl = "https://www.youtube-nocookie.com/embed/" + videoId + "?playsinline=1";
+      }
+    } catch(e) {}
+    $("songLink").href = safeUrl;
+    $("songPlayer").src = embedUrl;
+    $("songStatus").textContent = "Your song is ready ♡ Tap play in the player or open it in YouTube Music.";
+  });
+
+  const photoInput = $("photoInput"), grid = $("galleryGrid");
+  let addedUrls = [];
+  photoInput.addEventListener("change", () => {
+    [...photoInput.files].forEach(file => {
+      if (!file.type.startsWith("image/")) return;
+      const url = URL.createObjectURL(file); addedUrls.push(url);
+      const item = document.createElement("div");
+      const frame = document.createElement("div"); frame.className="photo";
+      const img = document.createElement("img"); img.src=url; img.alt="A memory of us";
+      frame.appendChild(img); item.appendChild(frame);
+      const cap=document.createElement("p");cap.className="photo-caption";cap.textContent="a little memory ♡";item.appendChild(cap);
+      grid.appendChild(item);
+    });
+    $("galleryStatus").textContent = addedUrls.length ? `${addedUrls.length} photo(s) added for this visit. ♡` : "";
+    photoInput.value="";
+  });
+  $("clearPhotos").addEventListener("click", () => {
+    const children = [...grid.children];
+    children.slice(4).forEach(el => el.remove());
+    addedUrls.forEach(url => URL.revokeObjectURL(url)); addedUrls=[];
+    $("galleryStatus").textContent="Added photos cleared.";
+  });
+})();
+</script>
+</body>
+</html>
