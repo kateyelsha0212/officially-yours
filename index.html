@@ -130,19 +130,19 @@ p{line-height:1.65}
       <div class="album">🎧💗</div>
       <h2 id="songTitle" style="font-size:19px">Our Song</h2>
       <p id="songArtist" class="sub">A song that feels like us</p>
-      <a id="songLink" class="primary" href="https://www.youtube.com/" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">Play our song ↗</a>
+      <div style="width:100%;max-width:320px;margin:14px auto 10px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#f7dce5"><iframe id="songPlayer" title="Our song on YouTube" width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/iiyrcma7OTs?playsinline=1" style="border:0" allow="encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><a id="songLink" class="primary" href="https://music.youtube.com/watch?v=iiyrcma7OTs&amp;si=V_Xkq1igfMY19uWc" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">Open our song ↗</a>
     </div>
-    <label for="songTitleInput" class="note">Song title</label><input class="field" id="songTitleInput" placeholder="Enter your song title">
-    <label for="songArtistInput" class="note">Artist / little dedication</label><input class="field" id="songArtistInput" placeholder="Artist or a short dedication">
-    <label for="songUrlInput" class="note">YouTube or Spotify link</label><input class="field" id="songUrlInput" type="url" placeholder="https://...">
+    <label for="songTitleInput" class="note">Song title</label><input class="field" id="songTitleInput" value="Our Song" placeholder="Enter your song title">
+    <label for="songArtistInput" class="note">Artist / little dedication</label><input class="field" id="songArtistInput" value="A song that reminds me of us ♡" placeholder="Artist or a short dedication">
+    <label for="songUrlInput" class="note">YouTube or Spotify link</label><input class="field" id="songUrlInput" type="url" value="https://music.youtube.com/watch?v=iiyrcma7OTs&amp;si=V_Xkq1igfMY19uWc" placeholder="https://...">
     <button id="saveSong" class="primary" style="width:100%">Save song details ♡</button>
-    <p id="songStatus" class="note" aria-live="polite">Changes stay in this page while it is open. Edit the defaults in the code if you want them saved for every visit.</p>
+    <p id="songStatus" class="note" aria-live="polite">Your song is set as the default. To change it for everyone, update the defaults in the website code.</p>
     <div style="margin-top:18px"><button class="secondary" data-home>Back to our little world</button></div>
   </section>
 
   <section id="galleryScreen" class="card hidden">
     <div class="section-head"><button class="back" data-home aria-label="Back">‹</button><div><div class="eyebrow">our little memories</div><h2>Our Little World 📸</h2></div></div>
-    <p class="sub">Add photos from your phone. They appear here in this session; to keep them permanently on the website, replace the sample image files and update the image paths in the code.</p>
+    <p class="sub">Your photos will be permanent once their image files are uploaded with this website. Photos added from this phone are only temporary in this browser session.</p>
     <div class="gallery-grid" id="galleryGrid">
       <div><div class="photo"><div class="placeholder"><b>♡</b>Our first favorite memory</div></div><p class="photo-caption">one of my favorite moments</p></div>
       <div><div class="photo"><div class="placeholder"><b>✧</b>Our little adventures</div></div><p class="photo-caption">more memories with you</p></div>
@@ -191,10 +191,21 @@ p{line-height:1.65}
     const artist = $("songArtistInput").value.trim() || "A song that feels like us";
     const rawUrl = $("songUrlInput").value.trim();
     $("songTitle").textContent = title; $("songArtist").textContent = artist;
-    let safeUrl = "https://www.youtube.com/";
-    try { const u = new URL(rawUrl); if (["https:","http:"].includes(u.protocol) && ["youtube.com","www.youtube.com","youtu.be","open.spotify.com","spotify.com","www.spotify.com"].some(d => u.hostname === d || u.hostname.endsWith("."+d))) safeUrl = u.href; } catch(e) {}
+    let safeUrl = "https://music.youtube.com/watch?v=iiyrcma7OTs&si=V_Xkq1igfMY19uWc";
+    let embedUrl = "https://www.youtube-nocookie.com/embed/iiyrcma7OTs?playsinline=1";
+    try {
+      const u = new URL(rawUrl);
+      if (["https:","http:"].includes(u.protocol) && ["youtube.com","www.youtube.com","music.youtube.com","youtu.be","open.spotify.com","spotify.com","www.spotify.com"].some(d => u.hostname === d || u.hostname.endsWith("."+d))) {
+        safeUrl = u.href;
+        let videoId = "";
+        if (u.hostname.endsWith("youtu.be")) videoId = u.pathname.split("/").filter(Boolean)[0] || "";
+        else if (u.hostname.includes("youtube.com")) videoId = u.searchParams.get("v") || (u.pathname.startsWith("/embed/") ? u.pathname.split("/")[2] : "");
+        if (videoId && /^[A-Za-z0-9_-]{6,}$/.test(videoId)) embedUrl = "https://www.youtube-nocookie.com/embed/" + videoId + "?playsinline=1";
+      }
+    } catch(e) {}
     $("songLink").href = safeUrl;
-    $("songStatus").textContent = rawUrl && safeUrl !== "https://www.youtube.com/" ? "Saved for this visit ♡ Tap “Play our song” to open it." : "Please enter a valid YouTube or Spotify link. ♡";
+    $("songPlayer").src = embedUrl;
+    $("songStatus").textContent = "Your song is ready ♡ Tap play in the player or open it in YouTube Music.";
   });
 
   const photoInput = $("photoInput"), grid = $("galleryGrid");
